@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Youtube Data</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        function getData(keyword, max_results=10){
+            var data = null;
+            var xhr = new XMLHttpRequest();
+            xhr.withCredentials = true;
+
+            xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                document.getElementById('result').value = this.responseText;
+            }
+            });
+            xhr.open("GET", "/q/?q="+keyword+"&max_results="+max_results);
+            xhr.send(data);
+        }
+        function submitForm(){
+            let keyword = document.getElementById('keyword').value;
+            let max_results = document.getElementById('max_results').value;
+            getData(keyword, max_results);
+        }
+    </script>
+</head>
+<body>
+    <h1>Welcome to Youtube Search Bar</h1>
+    <br>
+    <input type="text" id="keyword" placeholder="Enter query string "> 
+    <input type="number" id="max_results" placeholder="Enter no of results " max=50>
+    <button type="button" onclick="submitForm()">Search</button>
+    <br>
+    <textarea id="result" rows=100 cols=100></textarea>
+</body>
+</html>
